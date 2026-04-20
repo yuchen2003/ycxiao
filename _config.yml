@@ -13,10 +13,10 @@ title                    : "Yuchen Xiao"
 title_separator          : "-"
 name                     : &name "Yuchen Xiao"
 description              : &description "Personal academic website of Yuchen Xiao at the LAMDA Group, Nanjing University."
-url                      : https://yuchen.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
+url                      : https://yuchen2003.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "yuchen2003/yuchen.github.io"
+baseurl                  : "/ycxiao" # the subpath of your site, e.g. "/blog"
+repository               : "yuchen2003/ycxiao"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -29,7 +29,7 @@ author:
   bio              : "M.Sc. student at the LAMDA Group, School of Artificial Intelligence, Nanjing University."
   location         : "Nanjing, Jiangsu, China"
   employer         : "LAMDA Group, Nanjing University"
-  uri              : "https://yuchen.github.io"
+  uri              : "https://yuchen2003.github.io/ycxiao"
   email            : "xiaoyuchen@lamda.nju.edu.cn" 
 
   # Academic websites
