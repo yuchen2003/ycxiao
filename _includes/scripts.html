@@ -3,3 +3,38 @@
 {% include analytics.html %}
 
 {% include comments-providers/scripts.html %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const headings = document.querySelectorAll('section.page__content h1, section.page__content h2, section.page__content h3, section.page__content h4');
+    const tocLinks = document.querySelectorAll('.toc__menu li');
+
+    if (headings.length > 0 && tocLinks.length > 0) {
+      const options = {
+        root: null,
+        rootMargin: '-100px 0px -80% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            if (id) {
+              tocLinks.forEach(li => {
+                const link = li.querySelector('a');
+                if (link && link.getAttribute('href') === '#' + id) {
+                  li.classList.add('active');
+                } else {
+                  li.classList.remove('active');
+                }
+              });
+            }
+          }
+        });
+      }, options);
+
+      headings.forEach(heading => observer.observe(heading));
+    }
+  });
+</script>

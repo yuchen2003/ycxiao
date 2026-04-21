@@ -5,7 +5,11 @@ author_profile: true
 redirect_from:
   - /about/
   - /about.html
+toc: true
+toc_sticky: true
 ---
+
+{% include toc %}
 
 I am a M.Sc. student in the [LAMDA Group](http://www.lamda.nju.edu.cn/CH.MainPage.ashx) at the [School of Artificial Intelligence, Nanjing University](https://ai.nju.edu.cn/), under the supervision of Assistant Researcher [Lei Yuan](https://www.lamda.nju.edu.cn/yuanl/) and Prof. [Yang Yu](https://www.wolai.com/eyounx/dtR1MTyRXS5tP5Cex4KtdK).
 
