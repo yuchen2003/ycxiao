@@ -27,11 +27,12 @@
         </span>
       </h2>
       
-      <div style="display: flex; gap: 1.5em; margin-top: 0.5em; flex-wrap: wrap;">
+      <div style="display: flex; gap: 1.5em; margin-top: 0.5em; flex-wrap: wrap; align-items: center;">
         <div style="flex: 0 0 250px; max-width: 300px; min-width: 150px;">
           {% if post.teaser %}
-            <a href="{{ post.teaser | relative_url }}" target="_blank">
-              <img src="{{ post.teaser | relative_url }}" alt="" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--global-border-color);">
+            <!-- Thumbnail triggering JS lightbox -->
+            <a href="{{ post.teaser | relative_url }}" class="lightbox-trigger" style="display: block;">
+              <img src="{{ post.teaser | relative_url }}" alt="" style="width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--global-border-color); box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: opacity 0.2s ease;">
             </a>
           {% else %}
             <div style="background: var(--global-code-background-color); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: var(--global-text-color-light); border: 1px dashed var(--global-border-color); border-radius: 4px; font-size: 0.8em;">Diagram Placeholder</div>
@@ -40,9 +41,9 @@
         
         <div style="flex: 1; min-width: 200px;">
           {% if post.authors %}
-            <p style="margin-bottom: 0.5em; font-size: 0.95em;">{{ post.authors | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+            <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.95em;">{{ post.authors | markdownify | remove: '<p>' | remove: '</p>' }}</p>
           {% endif %}
-          <p style="margin-bottom: 0.5em;">Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p style="margin-top: 0; margin-bottom: 0.5em;">Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
           
           {% if post.excerpt %}
             <div class="archive__item-excerpt" itemprop="description" style="margin-bottom: 0.5em;">{{ post.excerpt | markdownify }}</div>
