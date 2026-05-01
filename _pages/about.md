@@ -35,7 +35,10 @@ My research interests include reinforcement learning, especially:
 Publication
 ======
 
-- **Yuchen Xiao**, Lei Yuan, Lihe Li, Ziqian Zhang, Yichen Li, Yang Yu. [Generalizable Offline Multiobjective Reinforcement Learning via Preference-Conditioned Diffuser](https://ieeexplore.ieee.org/document/11201894). *IEEE Transactions on Neural Networks and Learning Systems (TNNLS)*, 2025.
+{% assign sorted_publications = site.publications | sort: 'date' | reverse %}
+{% for post in sorted_publications %}
+- {{ post.authors | strip }} {% if post.paperurl %}[{{ post.title }}]({{ post.paperurl }}){% else %}{{ post.title }}{% endif %}. *{{ post.venue }}*, {{ post.date | date: "%Y" }}.
+{% endfor %}
 
 Awards and Honors
 ======

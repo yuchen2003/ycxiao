@@ -43,7 +43,7 @@
 <div id="js-lightbox" class="lightbox-overlay">
   <span class="lightbox-close" title="Close (Esc)">&times;</span>
   <div class="lightbox-scroll-container">
-    <img id="js-lightbox-img" src="" alt="Enlarged preview">
+    <img id="js-lightbox-img" alt="Enlarged preview">
   </div>
 </div>
 
@@ -51,55 +51,64 @@
   document.addEventListener('DOMContentLoaded', function() {
     const lightbox = document.getElementById('js-lightbox');
     const lightboxImg = document.getElementById('js-lightbox-img');
-    const closeBtn = document.querySelector('.lightbox-close');
+    const closeBtn = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+    const scrollContainer = lightbox ? lightbox.querySelector('.lightbox-scroll-container') : null;
     let isZoomed = false;
 
-    // Open lightbox
+    if (!lightbox || !lightboxImg || !closeBtn || !scrollContainer) {
+      return;
+    }
+
+    const resetZoom = () => {
+      isZoomed = false;
+      lightboxImg.classList.remove('zoomed');
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      resetZoom();
+      document.body.classList.remove('lightbox-open');
+      setTimeout(() => {
+        if (!lightbox.classList.contains('active')) {
+          lightboxImg.removeAttribute('src');
+        }
+      }, 300);
+    };
+
     document.querySelectorAll('.lightbox-trigger').forEach(trigger => {
       trigger.addEventListener('click', function(e) {
         e.preventDefault();
         lightboxImg.src = this.getAttribute('href');
         lightbox.classList.add('active');
-        isZoomed = false;
-        lightboxImg.classList.remove('zoomed');
+        document.body.classList.add('lightbox-open');
+        resetZoom();
       });
     });
 
-    // Close function
-    const closeLightbox = () => {
-      lightbox.classList.remove('active');
-      setTimeout(() => { lightboxImg.src = ''; }, 300); // clear source after fade out
-    };
-
-    // Close on click outside, or click on close button
-    lightbox.addEventListener('click', function(e) {
-      if (e.target !== lightboxImg) {
+    lightbox.addEventListener('pointerdown', function(e) {
+      if (e.target === lightbox || e.target === scrollContainer || e.target === closeBtn) {
         closeLightbox();
       }
     });
 
-    // Toggle zoom on image click
+    lightboxImg.addEventListener('pointerdown', function(e) {
+      e.stopPropagation();
+    });
+
     lightboxImg.addEventListener('click', function(e) {
+      e.preventDefault();
       e.stopPropagation();
       isZoomed = !isZoomed;
       if (isZoomed) {
-        // Calculate 200% of current display size
-        const currentWidth = this.clientWidth;
-        this.style.width = (currentWidth * 2) + 'px';
-        this.style.maxWidth = 'none';
-        this.style.maxHeight = 'none';
         this.classList.add('zoomed');
       } else {
-        this.style.width = '';
-        this.style.maxWidth = '';
-        this.style.maxHeight = '';
         this.classList.remove('zoomed');
       }
     });
 
-    // Close on ESC key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        e.preventDefault();
         closeLightbox();
       }
     });
